@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 있잖아 </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #FF4081;
+        }
+        #output {
+            font-size: 20px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+        button {
+            background-color: #FF4081;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #E91E63;
+        }
+    </style>
+</head>
+<body>
+    <h1>♥ 나는 너를... ♥</h1>
+    <button id="startBtn">start♥</button>
+    <div id="output"></div>
+    <h2 id="result"></h2>
+
+    <script>
+        const targetSARANGHAE = "사랑해";
+        const charset = "별하나추억사랑쓸함동경시어머니해";
+        // 별 하나에 추억과 사랑과 쓸쓸함과 동경과 시와 어머니 - 별헤는 밤, 윤동주
+        let bits = 0;
+
+        // 버튼 클릭 이벤트
+        document.getElementById("startBtn").addEventListener("click", () => {
+            document.getElementById("output").textContent = ""; 
+            document.getElementById("result").textContent = "";
+            startMonkeyTyping();
+        });
+
+
+        function getRandomChar() {
+            const index = Math.floor(Math.random() * charset.length);
+            return charset[index];
+        }
+
+        function startMonkeyTyping() {
+            let generated = "";
+            let interval = setInterval(() => {
+                const randomChar = getRandomChar();
+                generated += randomChar;
+                bits += 1;
+
+                document.getElementById("output").textContent = generated;
+
+                // '사랑해'가 나왔는지 확인
+                if (generated.includes(targetWord)) {
+                    clearInterval(interval); // 반복 종료
+                    document.getElementById("result").textContent = `${bits}만큼 사랑해!`;
+                }
+            }, 50); // 50ms마다 문자 추가
+        }
+    </script>
+</body>
+</html>
